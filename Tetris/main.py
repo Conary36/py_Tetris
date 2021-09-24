@@ -149,13 +149,13 @@ class Piece(object):
 
 
 def create_grid(locked_pos={}):
-    grid = [[(0, 0, 0) for x in range(10)] for x in range(20)]
+    grid = [[(0, 0, 0) for x in range(10)] for x in range(20)] # Creating 1 list for every row in our grid(10 colors in each row)
 
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if (j, i) in locked_pos:
-                c = locked_pos[(j, i)]
-                grid[i][j] = c
+    for i in range(len(grid)): # for every row in grid
+        for j in range(len(grid[i])): # for every column in grid
+            if (j, i) in locked_pos: # if position is in dictionary
+                c = locked_pos[(j, i)] # assign possition
+                grid[i][j] = c # then change grid position from black (0,0,0) to colored position
     return grid
 
 
@@ -172,7 +172,7 @@ def check_lost(positions):
 
 
 def get_shape():
-    return Piece(5, 0, random.choice(shapes))
+    return Piece(5, 0, random.choice(shapes)) # Picks shape and returns
 
 
 def draw_text_middle(text, size, color, surface):
@@ -226,19 +226,19 @@ def main(win):
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.KEYDOWN:
-                if pygame.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT:
                     current_piece.x -= 1
                     if not (valid_space(current_piece, grid)):
                         current_piece += 1
-                if pygame.key == pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     current_piece.x += 1
                     if not (valid_space(current_piece, grid)):
                         current_piece -= 1
-                if pygame.key == pygame.K_DOWN:
+                if event.key == pygame.K_DOWN:
                     current_piece.y += 1
                     if not (valid_space(current_piece, grid)):
                         current_piece.y -= 1
-                if pygame.key == pygame.K_UP:
+                if event.key == pygame.K_UP:
                     current_piece.rotation += 1
                     if not (valid_space(current_piece, grid)):
                         current_piece -= 1
